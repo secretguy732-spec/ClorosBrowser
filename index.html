@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>Cloros Browser</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="light-mode">
+
+  <!-- ── BROWSER SHELL ── -->
+  <div id="browser-shell">
+
+    <!-- ── TITLEBAR ── -->
+    <div id="titlebar">
+      <div id="window-controls">
+        <span class="wc wc-close" title="Close"></span>
+        <span class="wc wc-min" title="Minimize"></span>
+        <span class="wc wc-max" title="Maximize"></span>
+      </div>
+      <div id="tab-bar-wrapper">
+        <div id="tab-bar" role="tablist"></div>
+        <button id="btn-new-tab" title="New Tab" aria-label="New Tab">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div id="profile-area">
+        <button id="btn-incognito" title="Incognito Mode" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+        <button id="btn-profile" title="Profile" class="icon-btn profile-icon">
+          <span>C</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── TOOLBAR ── -->
+    <div id="toolbar">
+      <div id="nav-buttons">
+        <button id="btn-back"    class="nav-btn" title="Back"    disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button id="btn-forward" class="nav-btn" title="Forward" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button id="btn-reload"  class="nav-btn" title="Reload">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+        <button id="btn-home"    class="nav-btn" title="Home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </button>
+      </div>
+
+      <!-- Address Bar -->
+      <div id="address-bar-wrapper">
+        <span id="security-icon" title="Connection info">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </span>
+        <input id="address-bar" type="text" placeholder="Search or enter URL..." autocomplete="off" spellcheck="false" />
+        <button id="btn-bookmark-toggle" class="addr-btn" title="Bookmark this page">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+
+      <div id="toolbar-actions">
+        <button id="btn-extensions" class="nav-btn" title="Extensions">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </button>
+        <button id="btn-downloads" class="nav-btn" title="Downloads">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button id="btn-menu" class="nav-btn" title="Menu" id="btn-menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── BOOKMARK BAR ── -->
+    <div id="bookmark-bar">
+      <div id="bookmark-list"></div>
+    </div>
+
+    <!-- ── CONTENT AREA ── -->
+    <div id="content-area">
+      <!-- Progress Bar -->
+      <div id="progress-bar"><div id="progress-fill"></div></div>
+
+      <!-- Tab Frames Container -->
+      <div id="frames-container"></div>
+
+      <!-- New Tab / Home Page -->
+      <div id="new-tab-page" class="active-page">
+        <div id="ntp-bg"></div>
+        <div id="ntp-content">
+          <div id="ntp-logo">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="30" fill="url(#logoGrad)" opacity="0.9"/>
+              <path d="M20 32 Q32 16 44 32 Q32 48 20 32Z" fill="white" opacity="0.9"/>
+              <circle cx="32" cy="32" r="8" fill="white"/>
+              <circle cx="32" cy="32" r="4" fill="url(#logoGrad)"/>
+              <defs>
+                <linearGradient id="logoGrad" x1="0" y1="0" x2="64" y2="64">
+                  <stop offset="0%" stop-color="#4f8ef7"/>
+                  <stop offset="100%" stop-color="#7c3aed"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <h1>Cloros</h1>
+          </div>
+
+          <div id="ntp-search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="ntp-search" type="text" placeholder="Search the web..." autocomplete="off" />
+          </div>
+
+          <div id="ntp-shortcuts">
+            <div class="shortcut" data-url="https://google.com">
+              <div class="shortcut-icon" style="background:#fff"><img src="/favicon?url=https://google.com" alt="" onerror="this.style.display='none'" /><span>G</span></div>
+              <span>Google</span>
+            </div>
+            <div class="shortcut" data-url="https://youtube.com">
+              <div class="shortcut-icon" style="background:#ff0000"><span>▶</span></div>
+              <span>YouTube</span>
+            </div>
+            <div class="shortcut" data-url="https://github.com">
+              <div class="shortcut-icon" style="background:#24292e"><span style="color:white">⌥</span></div>
+              <span>GitHub</span>
+            </div>
+            <div class="shortcut" data-url="https://wikipedia.org">
+              <div class="shortcut-icon" style="background:#fff"><span>W</span></div>
+              <span>Wikipedia</span>
+            </div>
+            <div class="shortcut" data-url="https://reddit.com">
+              <div class="shortcut-icon" style="background:#ff4500"><span style="color:white">r/</span></div>
+              <span>Reddit</span>
+            </div>
+            <div class="shortcut" data-url="https://twitter.com">
+              <div class="shortcut-icon" style="background:#000"><span style="color:white">𝕏</span></div>
+              <span>Twitter</span>
+            </div>
+          </div>
+
+          <div id="ntp-datetime">
+            <div id="ntp-time"></div>
+            <div id="ntp-date"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Page -->
+      <div id="error-page">
+        <div id="error-content">
+          <div id="error-icon">⚠️</div>
+          <h2 id="error-title">Can't reach this page</h2>
+          <p id="error-msg">The site might be unavailable or you may have lost your internet connection.</p>
+          <button id="btn-error-reload" class="btn-primary">Try Again</button>
+        </div>
+      </div>
+
+      <!-- Loading Overlay -->
+      <div id="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- ── STATUS BAR ── -->
+    <div id="status-bar">
+      <span id="status-text"></span>
+      <div id="status-right">
+        <button id="btn-devtools" title="DevTools" class="status-btn">DevTools</button>
+        <button id="btn-darkmode" title="Toggle Dark Mode" class="status-btn">🌙</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT MENUS & PANELS ── -->
+
+  <!-- 3-dot Menu Dropdown -->
+  <div id="menu-dropdown" class="dropdown hidden">
+    <div class="menu-section">
+      <button class="menu-item" data-action="new-tab">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        New Tab
+      </button>
+      <button class="menu-item" data-action="incognito">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        New Incognito Tab
+      </button>
+    </div>
+    <div class="menu-divider"></div>
+    <div class="menu-section">
+      <button class="menu-item" data-action="history">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        History
+      </button>
+      <button class="menu-item" data-action="bookmarks">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        Bookmarks
+      </button>
+      <button class="menu-item" data-action="downloads">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Downloads
+      </button>
+    </div>
+    <div class="menu-divider"></div>
+    <div class="menu-section">
+      <button class="menu-item" data-action="zoom-in">🔍 Zoom In</button>
+      <button class="menu-item" data-action="zoom-out">🔎 Zoom Out</button>
+      <button class="menu-item" data-action="fullscreen">⛶ Fullscreen</button>
+    </div>
+    <div class="menu-divider"></div>
+    <div class="menu-section">
+      <button class="menu-item" data-action="settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </button>
+    </div>
+  </div>
+
+  <!-- History Panel -->
+  <div id="history-panel" class="side-panel hidden">
+    <div class="panel-header">
+      <h3>History</h3>
+      <div class="panel-actions">
+        <button id="btn-clear-history" class="panel-action-btn">Clear All</button>
+        <button class="panel-close-btn" data-panel="history-panel">✕</button>
+      </div>
+    </div>
+    <div class="panel-search">
+      <input type="text" id="history-search" placeholder="Search history..." />
+    </div>
+    <div id="history-list" class="panel-list"></div>
+  </div>
+
+  <!-- Bookmarks Panel -->
+  <div id="bookmarks-panel" class="side-panel hidden">
+    <div class="panel-header">
+      <h3>Bookmarks</h3>
+      <button class="panel-close-btn" data-panel="bookmarks-panel">✕</button>
+    </div>
+    <div id="bookmarks-list" class="panel-list"></div>
+  </div>
+
+  <!-- Downloads Panel -->
+  <div id="downloads-panel" class="side-panel hidden">
+    <div class="panel-header">
+      <h3>Downloads</h3>
+      <button class="panel-close-btn" data-panel="downloads-panel">✕</button>
+    </div>
+    <div id="downloads-list" class="panel-list">
+      <p class="panel-empty">No downloads yet.</p>
+    </div>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settings-panel" class="side-panel hidden" style="width:420px">
+    <div class="panel-header">
+      <h3>Settings</h3>
+      <button class="panel-close-btn" data-panel="settings-panel">✕</button>
+    </div>
+    <div class="settings-body">
+      <div class="settings-section">
+        <h4>Appearance</h4>
+        <div class="settings-row">
+          <span>Theme</span>
+          <div class="toggle-group">
+            <button class="toggle-btn active" id="theme-light">Light</button>
+            <button class="toggle-btn" id="theme-dark">Dark</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <span>Bookmark Bar</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-bookmarks" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="settings-section">
+        <h4>Search Engine</h4>
+        <select id="search-engine-select">
+          <option value="https://www.google.com/search?q=">Google</option>
+          <option value="https://www.bing.com/search?q=">Bing</option>
+          <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+          <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+          <option value="https://www.ecosia.org/search?q=">Ecosia</option>
+        </select>
+      </div>
+      <div class="settings-section">
+        <h4>Homepage</h4>
+        <input type="text" id="homepage-url" placeholder="https://..." class="settings-input" />
+      </div>
+      <div class="settings-section">
+        <h4>Privacy & Data</h4>
+        <button class="btn-danger" id="btn-clear-all-history">Clear Browsing History</button>
+        <button class="btn-danger" id="btn-clear-bookmarks">Clear All Bookmarks</button>
+      </div>
+      <div class="settings-section">
+        <h4>About Cloros</h4>
+        <p class="about-text">Cloros Browser v1.0.0<br/>Built with Node.js + Express<br/>© 2025 Cloros Project</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DevTools Panel -->
+  <div id="devtools-panel" class="bottom-panel hidden">
+    <div class="panel-header">
+      <div class="devtools-tabs">
+        <button class="dt-tab active" data-tab="console">Console</button>
+        <button class="dt-tab" data-tab="network">Network</button>
+        <button class="dt-tab" data-tab="storage">Storage</button>
+      </div>
+      <button class="panel-close-btn" data-panel="devtools-panel">✕</button>
+    </div>
+    <div id="dt-console" class="dt-pane active">
+      <div id="console-output"></div>
+      <div id="console-input-row">
+        <span class="console-prompt">&gt;</span>
+        <input type="text" id="console-input" placeholder="JavaScript console..." />
+      </div>
+    </div>
+    <div id="dt-network" class="dt-pane">
+      <div id="network-log"></div>
+    </div>
+    <div id="dt-storage" class="dt-pane">
+      <div id="storage-view"></div>
+    </div>
+  </div>
+
+  <!-- Overlay backdrop -->
+  <div id="panel-backdrop" class="hidden"></div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
